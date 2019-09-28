@@ -113,6 +113,23 @@ def heap_sort(arr):
         arr[0], arr[i] = arr[i], arr[0]
         adjust_heap(arr,0,i)
     return arr
+#############################################################
+import math
+def radix_sort(arr):
+    """基数排序"""
+    radix = 10
+    k = math.ceil(math.log(max(arr), radix))
+    bucket = [[] for _ in range(radix)]
+    for i in range(1, k + 1):
+        for j in arr:
+            bucket[j // (radix**(i - 1)) % radix].append(j)
+        del arr[::]
+        for m in bucket:
+            arr += m
+            del m[::]
+        bucket = [[] for _ in range(radix)]
+    return arr
+
 arr = list(np.random.randint(1,130,10))
 
 """
